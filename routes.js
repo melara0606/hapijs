@@ -7,12 +7,13 @@ module.exports = [
     path: '/',
     method: 'GET',
     handler: site.home
-  }, {
+  }, 
+  {
     path: '/register',
     method: 'GET',
-
     handler: user.register
-  }, {
+  }, 
+  {
     path: '/crear-usuario',
     method: 'POST',
     options: {
@@ -25,7 +26,26 @@ module.exports = [
       }
     },
     handler: user.createUser
-  }, {
+  },
+  {
+    path: '/login',
+    method: 'GET',
+    handler: user.login
+  },
+  {
+    path: '/valid-user',
+    method: 'POST',
+    options: {
+      validate: {
+        payload: {
+          email: Joi.string().email().required(),
+          password: Joi.string().required().min(6)
+        }
+      }
+    },
+    handler: user.validUser
+  },
+  {
     path: '/{param*}',
     method: 'GET',
     handler: {
